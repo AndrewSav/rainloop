@@ -1,14 +1,14 @@
-FROM alpine:3.14
+FROM alpine:3.17
 
 LABEL description "Rainloop is a simple, modern & fast web-based client"
 
-ARG RAINLOOP_VER=1.16.0
+ARG RAINLOOP_VER=1.17.0
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
 ENV UID=991 GID=991 UPLOAD_MAX_SIZE=25M LOG_TO_STDOUT=false MEMORY_LIMIT=128M
 
-RUN echo "@community https://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/apk/repositories \
+RUN echo "@community https://nl.alpinelinux.org/alpine/v3.17/community" >> /etc/apk/repositories \
  && apk -U upgrade \
  && apk add -t build-dependencies \
     gnupg \
@@ -19,22 +19,22 @@ RUN echo "@community https://nl.alpinelinux.org/alpine/v3.13/community" >> /etc/
     nginx \
     s6 \
     su-exec \
-    php7-fpm@community \
-    php7-curl@community \
-    php7-iconv@community \
-    php7-xml@community \
-    php7-dom@community \
-    php7-openssl@community \
-    php7-json@community \
-    php7-zlib@community \
-    php7-pdo_pgsql@community \
-    php7-pdo_mysql@community \
-    php7-pdo_sqlite@community \
-    php7-sqlite3@community \
-    php7-ldap@community \
-    php7-simplexml@community \
+    php81-fpm@community \
+    php81-curl@community \
+    php81-iconv@community \
+    php81-xml@community \
+    php81-dom@community \
+    php81-openssl@community \
+    php81-json@community \
+    php81-zlib@community \
+    php81-pdo_pgsql@community \
+    php81-pdo_mysql@community \
+    php81-pdo_sqlite@community \
+    php81-sqlite3@community \
+    php81-ldap@community \
+    php81-simplexml@community \
  && cd /tmp \
- && RAINLOOP_ZIP="rainloop-community-${RAINLOOP_VER}.zip" \
+ && RAINLOOP_ZIP="rainloop-legacy-${RAINLOOP_VER}.zip" \
  && wget -q -O rainloop-community-latest.zip https://github.com/RainLoop/rainloop-webmail/releases/download/v${RAINLOOP_VER}/${RAINLOOP_ZIP} \
  && wget -q -O rainloop-community-latest.zip.asc https://github.com/RainLoop/rainloop-webmail/releases/download/v${RAINLOOP_VER}/${RAINLOOP_ZIP}.asc \
  && wget -q https://www.rainloop.net/repository/RainLoop.asc \
