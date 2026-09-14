@@ -1,10 +1,10 @@
-FROM alpine:3.17
+FROM alpine:3.24
 
-LABEL description "Rainloop is a simple, modern & fast web-based client"
+LABEL description="Rainloop is a simple, modern & fast web-based client"
 
 ARG RAINLOOP_VER=1.17.0
 
-ARG PHP_VERSION=81
+ARG PHP_VERSION=85
 
 ARG GPG_FINGERPRINT="3B79 7ECE 694F 3B7B 70F3  11A4 ED7C 49D9 87DA 4591"
 
@@ -26,8 +26,7 @@ RUN apk update && apk -U upgrade \
     php${PHP_VERSION}-xml \
     php${PHP_VERSION}-dom \
     php${PHP_VERSION}-openssl \
-    php${PHP_VERSION}-json \
-    php${PHP_VERSION}-zlib \
+    php${PHP_VERSION}-mbstring \
     php${PHP_VERSION}-pdo_pgsql \
     php${PHP_VERSION}-pdo_mysql \
     php${PHP_VERSION}-pdo_sqlite \
