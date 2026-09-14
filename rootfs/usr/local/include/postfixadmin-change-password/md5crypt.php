@@ -102,7 +102,7 @@ function md5crypt($pw, $salt = "", $magic = "")
 
 function create_salt()
 {
-    srand((double) microtime() * 1000000);
+    srand((float) microtime() * 1000000);
     return substr(md5(rand(0,9999999)), 0, 8);
 }
 

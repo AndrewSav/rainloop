@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # Set attachment size limit
-sed -i "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /etc/php81/php-fpm.conf /etc/nginx/nginx.conf
-sed -i "s/<MEMORY_LIMIT>/$MEMORY_LIMIT/g" /etc/php81/php-fpm.conf
+sed -i "s/<UPLOAD_MAX_SIZE>/$UPLOAD_MAX_SIZE/g" /etc/php85/php-fpm.conf /etc/nginx/nginx.conf
+sed -i "s/<MEMORY_LIMIT>/$MEMORY_LIMIT/g" /etc/php85/php-fpm.conf
 
 # Remove postfixadmin-change-password plugin if exist
 if [ -d "/rainloop/data/_data_/_default_/plugins/postfixadmin-change-password" ]; then
@@ -14,7 +14,7 @@ if [ "$LOG_TO_STDOUT" = true ]; then
   echo "[INFO] Logging to stdout activated"
   chmod o+w /dev/stdout
   sed -i "s/.*error_log.*$/error_log \/dev\/stdout warn;/" /etc/nginx/nginx.conf
-  sed -i "s/.*error_log.*$/error_log = \/dev\/stdout/" /etc/php81/php-fpm.conf
+  sed -i "s/.*error_log.*$/error_log = \/dev\/stdout/" /etc/php85/php-fpm.conf
 fi
 
 # Add postfixadmin-change-password plugin
@@ -25,4 +25,4 @@ cp -r /usr/local/include/postfixadmin-change-password /rainloop/data/_data_/_def
 chown -R $UID:$GID /rainloop/data /services /var/log /var/lib/nginx
 
 # RUN !
-exec su-exec $UID:$GID /bin/s6-svscan /services
+exec su-exec $UID:$GID s6-svscan /services
